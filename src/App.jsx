@@ -1,35 +1,134 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [todos, setTodos] = useState([]);
+  const [todoItem, setTodoItem] = useState("");
+  const [isClicked, setIsClicked] = useState("all");
+
+  //captures onchange event on input
+  function handleOnchange(e) {
+    setTodoItem(e.target.value);
+  }
+
+  //adds item to the todos array
+  function handleOnClickAdd(e) {
+    e.preventDefault();
+
+    if (todoItem.trim() !== "") {
+      const newTodo = { id: Math.random(), text: todoItem, status: false };
+      setTodos((prevTodos) => [...prevTodos, newTodo]);
+      setTodoItem("");
+    }
+  }
+
+  // Toggles the status of a todo item
+  function handleToggleStatus(id) {
+    setTodos((prevTodos) =>
+      prevTodos.map((item) =>
+        item.id === id ? { ...item, status: !item.status } : item
+      )
+    );
+  }
+
+  // Removes a todo item
+  function handleRemoveItem(id) {
+    setTodos((prevTodos) => prevTodos.filter((item) => item.id !== id));
+  }
+
+  // Function to clear completed todo items
+  function handleClearCompleted() {
+    setTodos((prevTodos) => prevTodos.filter((item) => !item.status));
+  }
+
+  // Function to filter the todos based on the current view
+  const filteredTodos = todos.filter((item) =>
+    isClicked === "all"
+      ? true
+      : isClicked === "active"
+      ? !item.status
+      : isClicked === "completed"
+      ? item.status
+      : true
+  );
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <div id="app-container">
+        <img
+          className="top-img"
+          src="bg-desktop-light.jpg"
+          alt="Background Image"
+        />
+        <div className="header-container">
+          <p className="header-text">TODO</p>
+          <p>
+            <img className="header-icon" src="icon-moon.svg" />
+          </p>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+
+      <div className="todo-container">
+        <form onSubmit={handleOnClickAdd}>
+          <div className="input-wrapper">
+            <input
+              type="text"
+              value={todoItem}
+              placeholder="Create a new todo..."
+              className="todo-input"
+              onChange={handleOnchange}
+            />
+          </div>
+        </form>
+
+        <div className="todo-list">
+          {filteredTodos.map((item) => (
+            <div className="todo-item" key={item.id}>
+              <span className="completed-span">
+                <input
+                  type="checkbox"
+                  className="completed-checkbox"
+                  checked={item.status}
+                  onChange={() => handleToggleStatus(item.id)}
+                />
+              </span>
+              <span
+                className={
+                  item.status === true ? "todo-text-completed" : "todo-text"
+                }
+              >
+                {item.text}
+              </span>
+              <span className="remove-span">
+                <a
+                  className="remove-btn"
+                  onClick={() => handleRemoveItem(item.id)}
+                >
+                  <img src="icon-cross.svg" alt="Cross" />
+                </a>
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <div className="links">
+          <p>{todos.filter((item) => !item.status).length} items left</p>
+          <p>
+            <a onClick={() => setIsClicked("all")}>All</a>
+          </p>
+          <p>
+            <a onClick={() => setIsClicked("active")}>Active</a>
+          </p>
+          <p>
+            <a onClick={() => setIsClicked("completed")}>Completed</a>
+          </p>
+          <p>
+            <a onClick={handleClearCompleted}>Clear Completed</a>
+          </p>
+        </div>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
