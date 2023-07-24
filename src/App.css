@@ -163,7 +163,7 @@ html {
 
 .completed-checkbox:checked {
   background-color: rgb(34, 193, 195);
-  background-image: url("icon-check.svg");
+  background-image: url("/todo-app/icon-check.svg");
   background-size: 70%;
   background-position: center;
   background-repeat: no-repeat;
@@ -172,7 +172,7 @@ html {
 
 .completed-checkbox-dark:checked {
   background-color: rgb(34, 193, 195);
-  background-image: url("icon-check.svg");
+  background-image: url("/todo-app/icon-check.svg");
   background-size: 70%;
   background-position: center;
   background-repeat: no-repeat;
