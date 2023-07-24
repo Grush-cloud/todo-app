@@ -56,14 +56,13 @@ function App() {
   function handleDarkMode() {
     setIsDarkMode((prevState) => !prevState);
   }
-  console.log(isDarkMode);
 
   return (
-    <>
+    <div className={isDarkMode ? "app-container-dark" : ""}>
       <div id="img-container">
         <img
           className="header-img"
-          src="bg-desktop-light.jpg"
+          src={isDarkMode ? "bg-desktop-dark.jpg" : "bg-desktop-light.jpg"}
           alt="Background Image"
         />
         <div className="header-container">
@@ -84,19 +83,29 @@ function App() {
               type="text"
               value={todoItem}
               placeholder="Create a new todo..."
-              className="todo-input"
+              className={isDarkMode ? "todo-input-dark" : "todo-input"}
               onChange={handleOnchange}
             />
+            <button
+              className={isDarkMode ? "add-button-dark" : "add-button"}
+            ></button>
           </div>
         </form>
 
         <div className="todo-list">
           {filteredTodos.map((item) => (
-            <div className="todo-item" key={item.id}>
+            <div
+              className={isDarkMode ? "todo-item-dark" : "todo-item"}
+              key={item.id}
+            >
               <span className="completed-span">
                 <input
                   type="checkbox"
-                  className="completed-checkbox"
+                  className={
+                    isDarkMode
+                      ? "completed-checkbox-dark"
+                      : "completed-checkbox"
+                  }
                   checked={item.status}
                   onChange={() => handleToggleStatus(item.id)}
                 />
@@ -120,23 +129,40 @@ function App() {
           ))}
         </div>
 
-        <div className="links">
+        <div className={isDarkMode ? "links-dark" : "links"}>
           <p>{todos.filter((item) => !item.status).length} items left</p>
+
           <p>
-            <a onClick={() => setIsClicked("all")}>All</a>
+            <a
+              className={isClicked === "all" ? "active" : ""}
+              onClick={() => setIsClicked("all")}
+            >
+              All
+            </a>
           </p>
           <p>
-            <a onClick={() => setIsClicked("active")}>Active</a>
+            <a
+              className={isClicked === "active" ? "active" : ""}
+              onClick={() => setIsClicked("active")}
+            >
+              Active
+            </a>
           </p>
           <p>
-            <a onClick={() => setIsClicked("completed")}>Completed</a>
+            <a
+              className={isClicked === "completed" ? "active" : ""}
+              onClick={() => setIsClicked("completed")}
+            >
+              Completed
+            </a>
           </p>
+
           <p>
             <a onClick={handleClearCompleted}>Clear Completed</a>
           </p>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

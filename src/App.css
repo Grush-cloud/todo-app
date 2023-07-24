@@ -1,6 +1,6 @@
 :root {
-  /* --color-dark-grayish-blue: #222831;
-  --color-very-light-grayish-blue: #fafafa; */
+  --color-dark-grayish-blue: #222831;
+  --color-very-light-grayish-blue: #fafafa;
 }
 
 body,
@@ -10,6 +10,10 @@ html {
   height: 100%;
 }
 
+.app-container-dark {
+  background-color: #161722;
+  height: 100vh;
+}
 #img-container {
   position: relative;
 }
@@ -57,63 +61,116 @@ html {
   transform: translateY(-40px);
 }
 
-.input-wrapper .todo-input {
+.input-wrapper {
+  position: relative;
+}
+
+.todo-input {
   padding: 5px;
   margin-bottom: 20px;
   background-color: white;
-  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
+  background-color: var(--color-very-light-grayish-blue);
+  border: 2px solid var(--color-very-light-grayish-blue);
   border-radius: 4px;
   padding: 20px;
   width: 92%;
-  border: 2px solid var(--color-dark-grayish-blue);
   font-size: 18px;
   color: #777a92;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+  text-indent: 8%;
 }
 
-.add-checkbox {
-  position: relative;
-  appearance: none;
-
-  height: 20px;
-  width: 20px;
+.todo-input-dark {
+  padding: 5px;
+  margin-bottom: 20px;
   background-color: white;
+  box-shadow: 0px 0px 2px white;
+  border-radius: 4px;
+  padding: 20px;
+  width: 92%;
+  font-size: 18px;
+  color: #777a92;
+  border: 2px thin var(--color-dark-grayish-blue);
+  background-color: var(--color-dark-grayish-blue);
+  text-indent: 8%;
+}
+
+.add-button {
+  display: block;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  border: 1px solid gray;
+  background-color: var(--color-very-light-grayish-blue);
   cursor: pointer;
-  border-radius: 100%;
-  outline: none;
-
-  border: 2px solid #ccc;
+  position: absolute; /* Add absolute positioning to the app button */
+  top: 50%;
+  left: 4%; /* Adjust the distance from the right edge of the input */
+  transform: translateY(-95%); /* Center the button vertically */
+}
+.add-button-dark {
+  display: block;
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  border: 1px solid gray;
+  background-color: var(--color-dark-grayish-blue);
+  cursor: pointer;
+  position: absolute; /* Add absolute positioning to the app button */
+  top: 50%;
+  left: 4%; /* Adjust the distance from the right edge of the input */
+  transform: translateY(-95%); /* Center the button vertically */
 }
 
-.add-checkbox:checked {
-  background-color: green;
+.add-button:hover {
+  background-color: rgb(34, 193, 195);
+  cursor: pointer;
   background-image: url("icon-check.svg");
-  background-size: 70%;
-  background-position: center;
   background-repeat: no-repeat;
+  background-position: center;
 }
-
-.add-checkbox:checked::before {
-  content: "";
-  display: none;
+.add-button-dark:hover {
+  background-color: rgb(34, 193, 195);
+  cursor: pointer;
+  background-image: url("icon-check.svg");
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .completed-checkbox {
   position: relative;
   appearance: none;
-
   width: 25px;
-
   height: 25px;
-
-  background-color: white;
+  background-color: var(--color-very-light-grayish-blue);
   cursor: pointer;
   border-radius: 100%;
   outline: none;
-
   border: 2px solid #ccc;
 }
 
+.completed-checkbox-dark {
+  position: relative;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  background-color: var(--color-dark-grayish-blue);
+  border-radius: 100%;
+  outline: none;
+  border: 2px solid #ccc;
+  cursor: pointer;
+}
+
 .completed-checkbox:checked {
+  background-color: rgb(34, 193, 195);
+  background-image: url("icon-check.svg");
+  background-size: 70%;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.completed-checkbox-dark:checked {
   background-color: rgb(34, 193, 195);
   background-image: url("icon-check.svg");
   background-size: 70%;
@@ -133,15 +190,24 @@ html {
 .todo-item {
   display: flex;
   align-items: center;
-  border: 2px solid var(--color-dark-grayish-blue);
-
   margin: 0;
   padding: 5px;
-  background-color: var(--color-dark-grayish-blue);
   padding: 15px;
-  border-radius: 5px;
-  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
-  margin-bottom: 0.5px;
+
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+
+  border-bottom: 0.5px solid var(--color-very-light-grayish-blue);
+  background-color: var(--color-very-light-grayish-blue);
+}
+
+.todo-item-dark {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 5px;
+  padding: 15px;
+  border-bottom: 0.5px solid var(--color-very-light-grayish-blue);
+  background-color: var(--color-dark-grayish-blue);
 }
 
 .todo-text {
@@ -195,14 +261,25 @@ html {
 .links {
   display: flex;
   justify-content: space-around;
-  border-bottom: 0.5px solid white;
-  background-color: var(--color-dark-grayish-blue);
-  font-size: 13px;
+  border: 2px thin var(--color-very-light-grayish-blue);
+  font-size: 15px;
   padding: 15px;
-  border-radius: 4px;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+  color: #777a92;
+}
+
+.links-dark {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 0.5px solid white;
+  font-size: 15px;
+  padding: 15px;
+
   box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
   color: #777a92;
-  font-size: 13px;
+
+  border: 2px thin var(--color-dark-grayish-blue);
+  background-color: var(--color-dark-grayish-blue);
 }
 
 .links a {
@@ -211,7 +288,15 @@ html {
 
 /* Add styles for the active link */
 .links a.active {
-  color: #ff0000;
+  font-weight: bold;
+}
+
+.links-dark a {
+  cursor: pointer;
+}
+
+/* Add styles for the active link */
+.links-dark a.active {
   font-weight: bold;
 }
 
