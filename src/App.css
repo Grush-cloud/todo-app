@@ -125,14 +125,14 @@ html {
 .add-button:hover {
   background-color: rgb(34, 193, 195);
   cursor: pointer;
-  background-image: url("icon-check.svg");
+  background-image: url("/todo-app/icon-check.svg");
   background-repeat: no-repeat;
   background-position: center;
 }
 .add-button-dark:hover {
   background-color: rgb(34, 193, 195);
   cursor: pointer;
-  background-image: url("icon-check.svg");
+  background-image: url("/todo-app/icon-check.svg");
   background-repeat: no-repeat;
   background-position: center;
 }
