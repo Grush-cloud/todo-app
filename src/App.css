@@ -1,3 +1,8 @@
+:root {
+  /* --color-dark-grayish-blue: #222831;
+  --color-very-light-grayish-blue: #fafafa; */
+}
+
 body,
 html {
   margin: 0;
@@ -5,11 +10,11 @@ html {
   height: 100%;
 }
 
-#app-container {
+#img-container {
   position: relative;
 }
 
-.top-img {
+.header-img {
   width: 100vw;
   height: 200px;
   margin: 0;
@@ -21,111 +26,99 @@ html {
   justify-content: space-between;
   /* Place header text at the start and icon at the end */
   position: absolute;
-  top: 50%; /* Center the header vertically */
-  left: 50%; /* Center the header horizontally */
+  top: 50%;
+  left: 50%;
   transform: translate(-50%, -50%);
-  /* Center the header exactly on the image */
+
   color: white;
   font-size: 24px;
   font-weight: bold;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 
   width: 500px; /* Set the same width as the todo-container */
-  max-width: 100%; /* Ensure it doesn't exceed the width of the parent container */
-  padding: 10px; /* Add some padding for better spacing */
+  max-width: 100%;
+  padding: 10px;
 }
 
 .header-text {
-  margin-right: auto; /* Push the icon to the end */
+  margin-right: auto;
+}
+
+.header-icon {
+  cursor: pointer;
 }
 
 .todo-container {
   display: flex;
   flex-direction: column;
-  width: 500px; /* Adjust the width for larger screens */
-  max-width: 100%; /* Ensure it doesn't exceed the width of the parent container */
+  width: 500px;
+  max-width: 100%;
   margin: 0 auto; /* Center the container */
+  transform: translateY(-40px);
 }
 
 .input-wrapper .todo-input {
   padding: 5px;
   margin-bottom: 20px;
-  background-color: var(--color-dark-grayish-blue);
+  background-color: white;
   box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
   border-radius: 4px;
   padding: 20px;
   width: 92%;
-  border: 2px thin var(--color-dark-grayish-blue);
+  border: 2px solid var(--color-dark-grayish-blue);
+  font-size: 18px;
+  color: #777a92;
 }
 
-/* Styles for the circular "Add Item" checkbox */
 .add-checkbox {
   position: relative;
   appearance: none;
-  /* Hide the default checkbox appearance */
-  width: 20px;
-  /* Set the width of the circular checkbox */
+
   height: 20px;
-  /* Set the height of the circular checkbox */
+  width: 20px;
   background-color: white;
   cursor: pointer;
   border-radius: 100%;
   outline: none;
-  /* Remove the focus outline on click */
+
   border: 2px solid #ccc;
-  /* Add a border to make the checkbox visible */
 }
 
-/* Add a background image for the checked state of the "Add Item" checkbox */
 .add-checkbox:checked {
   background-color: green;
-  /* Set the background color when checked */
   background-image: url("icon-check.svg");
-  /* Set the checkmark image */
   background-size: 70%;
-  /* Adjust the size of the checkmark image */
   background-position: center;
-  /* Center the checkmark image */
   background-repeat: no-repeat;
-  /* Prevent the image from repeating */
 }
 
-/* Hide the default checkmark image on the "Add Item" checkbox */
 .add-checkbox:checked::before {
   content: "";
   display: none;
 }
 
-/* Styles for the circular checkbox */
 .completed-checkbox {
   position: relative;
   appearance: none;
-  /* Hide the default checkbox appearance */
-  width: 20px;
-  /* Set the width of the circular checkbox */
-  height: 20px;
-  /* Set the height of the circular checkbox */
+
+  width: 25px;
+
+  height: 25px;
+
   background-color: white;
   cursor: pointer;
   border-radius: 100%;
   outline: none;
-  /* Remove the focus outline on click */
+
   border: 2px solid #ccc;
-  /* Add a border to make the checkbox visible */
 }
 
-/* Add a background image for the checked state */
 .completed-checkbox:checked {
-  background-color: green;
-  /* Set the background color when checked */
+  background-color: rgb(34, 193, 195);
   background-image: url("icon-check.svg");
-  /* Set the checkmark image */
   background-size: 70%;
-  /* Adjust the size of the checkmark image */
   background-position: center;
-  /* Center the checkmark image */
   background-repeat: no-repeat;
-  /* Prevent the image from repeating */
 }
 
 /* Hide the default checkmark image on the checkbox */
@@ -140,12 +133,13 @@ html {
 .todo-item {
   display: flex;
   align-items: center;
-  border-bottom: 0.1rem solid var(--color-very-light-grayish-blue);
+  border: 2px solid var(--color-dark-grayish-blue);
+
   margin: 0;
   padding: 5px;
   background-color: var(--color-dark-grayish-blue);
   padding: 15px;
-  border-radius: 4px;
+  border-radius: 5px;
   box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
   margin-bottom: 0.5px;
 }
@@ -153,9 +147,10 @@ html {
 .todo-text {
   flex: 1;
   font-weight: 400;
-  font-size: medium;
+  font-size: 18px;
   max-width: 100%;
   word-break: break-all;
+  color: #777a92;
 }
 
 .todo-text-completed {
@@ -165,6 +160,8 @@ html {
   max-width: 100%;
   word-break: break-all;
   text-decoration: line-through;
+  font-size: 18px;
+  color: #777a92;
 }
 
 .completed-span {
@@ -192,7 +189,7 @@ html {
 
 .remove-btn {
   cursor: pointer;
-  color: black;
+  color: rgb(86, 81, 81);
 }
 
 .links {
@@ -204,19 +201,18 @@ html {
   padding: 15px;
   border-radius: 4px;
   box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
+  color: #777a92;
+  font-size: 13px;
 }
 
 .links a {
   cursor: pointer;
 }
-.links a:active {
-  color: #ff0000; /* Change the text color when the link is clicked */
-}
-.links a:hover {
-  color: #ff0000; /* Change the text color when the link is clicked */
-}
-.links a:visited {
-  color: #ff0000; /* Change the text color when the link is clicked */
+
+/* Add styles for the active link */
+.links a.active {
+  color: #ff0000;
+  font-weight: bold;
 }
 
 /* Media query for smaller screens */

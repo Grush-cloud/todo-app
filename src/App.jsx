@@ -5,6 +5,7 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [todoItem, setTodoItem] = useState("");
   const [isClicked, setIsClicked] = useState("all");
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   //captures onchange event on input
   function handleOnchange(e) {
@@ -52,19 +53,27 @@ function App() {
       : true
   );
 
+  function handleDarkMode() {
+    setIsDarkMode((prevState) => !prevState);
+  }
+  console.log(isDarkMode);
+
   return (
     <>
-      <div id="app-container">
+      <div id="img-container">
         <img
-          className="top-img"
+          className="header-img"
           src="bg-desktop-light.jpg"
           alt="Background Image"
         />
         <div className="header-container">
-          <p className="header-text">TODO</p>
-          <p>
-            <img className="header-icon" src="icon-moon.svg" />
-          </p>
+          <h1 className="header-text">TODO</h1>
+          <a onClick={handleDarkMode}>
+            <img
+              className="header-icon"
+              src={isDarkMode ? "icon-sun.svg" : "icon-moon.svg"}
+            />
+          </a>
         </div>
       </div>
 
