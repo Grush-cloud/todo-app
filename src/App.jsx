@@ -1,6 +1,9 @@
 import { useState } from "react";
 import "./App.css";
-
+import Header from "./components/Header";
+import Form from "./components/Form";
+import TodoList from "./components/TodoList";
+import NavLinks from "./components/NavLinks";
 function App() {
   const [todos, setTodos] = useState([]);
   const [todoItem, setTodoItem] = useState("");
@@ -59,108 +62,27 @@ function App() {
 
   return (
     <div className={isDarkMode ? "app-container-dark" : ""}>
-      <div id="img-container">
-        <img
-          className="header-img"
-          src={isDarkMode ? "bg-desktop-dark.jpg" : "bg-desktop-light.jpg"}
-          alt="Background Image"
-        />
-        <div className="header-container">
-          <h1 className="header-text">TODO</h1>
-          <a onClick={handleDarkMode}>
-            <img
-              className="header-icon"
-              src={isDarkMode ? "icon-sun.svg" : "icon-moon.svg"}
-            />
-          </a>
-        </div>
-      </div>
-
+      <Header isDarkMode={isDarkMode} handleDarkMode={handleDarkMode} />
       <div className="todo-container">
-        <form onSubmit={handleOnClickAdd}>
-          <div className="input-wrapper">
-            <input
-              type="text"
-              value={todoItem}
-              placeholder="Create a new todo..."
-              className={isDarkMode ? "todo-input-dark" : "todo-input"}
-              onChange={handleOnchange}
-            />
-            <button
-              className={isDarkMode ? "add-button-dark" : "add-button"}
-            ></button>
-          </div>
-        </form>
-
-        <div className="todo-list">
-          {filteredTodos.map((item) => (
-            <div
-              className={isDarkMode ? "todo-item-dark" : "todo-item"}
-              key={item.id}
-            >
-              <span className="completed-span">
-                <input
-                  type="checkbox"
-                  className={
-                    isDarkMode
-                      ? "completed-checkbox-dark"
-                      : "completed-checkbox"
-                  }
-                  checked={item.status}
-                  onChange={() => handleToggleStatus(item.id)}
-                />
-              </span>
-              <span
-                className={
-                  item.status === true ? "todo-text-completed" : "todo-text"
-                }
-              >
-                {item.text}
-              </span>
-              <span className="remove-span">
-                <a
-                  className="remove-btn"
-                  onClick={() => handleRemoveItem(item.id)}
-                >
-                  <img src="icon-cross.svg" alt="Cross" />
-                </a>
-              </span>
-            </div>
-          ))}
-        </div>
-
-        <div className={isDarkMode ? "links-dark" : "links"}>
-          <p>{todos.filter((item) => !item.status).length} items left</p>
-
-          <p>
-            <a
-              className={isClicked === "all" ? "active" : ""}
-              onClick={() => setIsClicked("all")}
-            >
-              All
-            </a>
-          </p>
-          <p>
-            <a
-              className={isClicked === "active" ? "active" : ""}
-              onClick={() => setIsClicked("active")}
-            >
-              Active
-            </a>
-          </p>
-          <p>
-            <a
-              className={isClicked === "completed" ? "active" : ""}
-              onClick={() => setIsClicked("completed")}
-            >
-              Completed
-            </a>
-          </p>
-
-          <p>
-            <a onClick={handleClearCompleted}>Clear Completed</a>
-          </p>
-        </div>
+        <Form
+          handleOnClickAdd={handleOnClickAdd}
+          todoItem={todoItem}
+          isDarkMode={isDarkMode}
+          handleOnchange={handleOnchange}
+        />
+        <TodoList
+          filteredTodos={filteredTodos}
+          isDarkMode={isDarkMode}
+          handleToggleStatus={handleToggleStatus}
+          handleRemoveItem={handleRemoveItem}
+        />
+        <NavLinks
+          isDarkMode={isDarkMode}
+          todos={todos}
+          isClicked={isClicked}
+          setIsClicked={setIsClicked}
+          handleClearCompleted={handleClearCompleted}
+        />
       </div>
     </div>
   );
